@@ -1,0 +1,13 @@
+h1 {
+  color: #4caf50;
+  text-align: center;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  margin: 5px 0;
+}

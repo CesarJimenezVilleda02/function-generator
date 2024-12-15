@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Package Overview</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <h1>Package Overview</h1>
+
+    <h2>1. functions</h2>
+    <p>
+        API for creating type-safe functions using language models.
+        This package provides a framework for generating functions from natural language descriptions, test scenarios,
+        and test classes. The API ensures type safety through generic types and provides comprehensive error handling.
+    </p>
+    <h3>Key Components</h3>
+    <ul>
+        <li><strong>FunctionGenerator</strong>: Builder for creating functions.</li>
+        <li><strong>FunctionGenerationStrategy</strong>: Interface for different backends used to generate functions.
+        </li>
+    </ul>
+    <h3>Thread Safety</h3>
+    <ul>
+        <li><strong>FunctionGenerator</strong> is not thread-safe. Each thread should create its own instance.</li>
+        <li><strong>FunctionGenerationStrategy</strong> implementations must be thread-safe.</li>
+    </ul>
+
+    <h2>2. scenarios</h2>
+    <p>
+        Provides classes for defining and managing test scenarios used in function creation.
+        This package contains components that enable developers to create and manage input-output pairs ("scenarios")
+        that guide the function generator in understanding the desired function behavior. Scenarios serve as
+        examples during function generation.
+    </p>
+    <h3>Key Components</h3>
+    <ul>
+        <li><strong>Scenario</strong>: Represents a single input-output test case, which serves as both an example for
+            generating functions and as a test for validation.</li>
+    </ul>
+    <h3>Thread Safety</h3>
+    <ul>
+        <li><strong>Scenario</strong> is immutable and thread-safe.</li>
+    </ul>
+    <h3>Best Practices</h3>
+    <ol>
+        <li>Include diverse scenarios covering normal cases, edge cases, and error cases to ensure comprehensive
+            function behavior.</li>
+        <li>Provide descriptive explanations for each scenario to improve clarity and understandability.</li>
+        <li>Ensure input and output types match the function's type parameters to maintain type safety.</li>
+        <li>Use meaningful test data that demonstrates the intended behavior effectively.</li>
+    </ol>
+
+    <h2>3. test_class</h2>
+    <p>
+        Provides utilities for configuring a builder to dynamically process test classes and packages for generating
+        scenarios.
+        These utilities allow developers to analyze test methods, extract input-output pairs, and integrate test-based
+        logic
+        into function generation.
+    </p>
+
+    <h3>Test Class Integration</h3>
+    <p>
+        The builder supports integration with test classes using the <strong>withTestClass</strong> method, which
+        processes
+        a single class for annotated test methods.
+    </p>
+    <ul>
+        <li>Test methods must be annotated with <strong>@Test</strong> for detection.</li>
+        <li>Setup and teardown methods annotated with <strong>@Before</strong> and <strong>@After</strong> are
+            recognized
+            and included in scenario processing.</li>
+    </ul>
+
+    <h3>Test Package Integration</h3>
+    <p>
+        The builder also supports batch processing of all test classes in a package using the
+        <strong>withTestPackage</strong> method. This method automatically retrieves all classes in the specified
+        package
+        and processes them individually.
+    </p>
+    <ul>
+        <li>Classes in the package are filtered to ensure they meet the criteria of test classes.</li>
+        <li>Each test class is processed using the <strong>withTestClass</strong> method, ensuring uniform handling of
+            individual tests.</li>
+    </ul>
+
+    <h3>Key Components</h3>
+    <ul>
+        <li><strong>
+                <a href="
+                        /docs/functions/FunctionGenerator.Builder.html#withTestClass(java.lang.Class)">withTestClass(Class&lt;T&gt;
+                    testClass)</a></strong>: Processes a single test class to extract input-output scenarios from its
+            annotated test methods.
+        </li>
+        <li><a href="
+                                /docs/functions/FunctionGenerator.Builder.html#withTestPackage(java.lang.Package)"><strong>withTestPackage(Package
+                    testPackage)</strong></a>: Processes all classes in a package, leveraging
+            <strong>withTestClass</strong> for each individual test class.
+        </li>
+    </ul>
+
+    <h3>Best Practices</h3>
+    <ol>
+        <li>Ensure test methods in test classes are annotated with <strong>@Test</strong> for detection by
+            <strong>withTestClass</strong>.
+        </li>
+        <li>Organize related test classes into packages to streamline scenario extraction using
+            <strong>withTestPackage</strong>.
+        </li>
+        <li>Use meaningful method names and annotations for setup (<strong>@Before</strong>) and teardown
+            (<strong>@After</strong>) methods to improve traceability.</li>
+        <li>Handle edge cases in test classes to enhance the robustness of the generated scenarios.</li>
+    </ol>
+    <h2>4. strategies</h2>
+    <p>
+        Provides classes for defining strategies to generate functions using external services or custom logic.
+        This package includes implementations of the FunctionGenerationStrategy interface that utilize different
+        backends, such as OpenAI or other language models, to create functions based on textual prompts.
+    </p>
+    <h3>Key Components</h3>
+    <ul>
+        <li><strong>FunctionGenerationStrategy</strong>: Interface for defining the contract for generating functions
+            using various backends.</li>
+        <li><strong>OpenAIFunctionGenerator</strong>: Implementation of function generation using external language
+            model service OpenAI.</li>
+        <li><strong>LlamaFunctionGenerator</strong>: Implementation of function generation using external language
+            model service Llama.</li>
+    </ul>
+    <h3>Thread Safety</h3>
+    <ul>
+        <li><strong>FunctionGenerationStrategy</strong> implementations must be thread-safe to ensure consistent
+            behavior across concurrent executions.</li>
+        <li><strong>OpenAIFunctionGenerator</strong> is thread-safe.</li>
+        <li><strong>LlamaFunctionGenerator</strong> is thread-safe.</li>
+    </ul>
+    <h3>Configuration</h3>
+    <p>
+        The package supports configuration through different backends (e.g., OpenAI, other LLMs), allowing users to
+        select
+        an appropriate strategy depending on their requirements. Implementations may use either programmatic
+        configuration
+        or configuration files.
+    </p>
+    <h2>5. Comprehensive Example</h2>
+    <p>
+        Below is a comprehensive example that demonstrates the capabilities of the API, including creating scenarios,
+        generating functions, and validating behavior.
+    </p>
+    <h3>Example Usage</h3>
+    <pre><code class="language-java">
+    // Import necessary classes
+    import functions.FunctionGenerator;
+    import scenarios.Scenario;
+    import strategies.openai.OpenAIFunctionGenerator;
+    
+    import java.util.Arrays;
+    import java.util.List;
+    
+    public class ComprehensiveExample {
+        public static void main(String[] args) {
+            // Step 1: Create scenarios for converting user requests to SQL queries
+            List&lt;Scenario&lt;String, String&gt;&gt; bookScenarios = Arrays.asList(
+                new Scenario&lt;&gt;("I want to see all books", "SELECT * FROM books", "Retrieve all books from the database."),
+                new Scenario&lt;&gt;("Find books by George Orwell", "SELECT * FROM books WHERE author = 'George Orwell'", "Find all books written by George Orwell."),
+                new Scenario&lt;&gt;("Show me books published in 1984", "SELECT * FROM books WHERE year = 1984", "Retrieve books published in the year 1984.")
+            );
+    
+            // Step 2: Configure the OpenAIFunctionGenerator with an API key (assumed to be loaded)
+            OpenAIFunctionGenerator functionGenerator = OpenAIFunctionGenerator.builder()
+                .withApiKey("your-api-key-here")
+                .build();
+    
+            // Step 3: Use FunctionGenerator to build a function
+            Function&lt;String, String&gt; bookRequestToSQLFunction = FunctionGenerator.&lt;String, String&gt;builder()
+                .withDescription("Converts user input into SQL queries for the books table. Handle text queries in a case-insensitive manner.")
+                .withScenarios(bookScenarios)
+                .withInputType(String.class)
+                .withOutputType(String.class)
+                .withStrategy(functionGenerator)
+                .build();
+    
+            // Step 4: Test the function with different inputs
+            try {
+                String result = bookRequestToSQLFunction.apply("Find books by George Orwell");
+                System.out.println("Generated SQL Query: " + result);
+            } catch (Exception e) {
+                System.err.println("Error: " + e.getMessage());
+            }
+        }
+    }
+        </code></pre>
+    <p>
+        This example demonstrates how to:
+    </p>
+    <ul>
+        <li>Create diverse scenarios that act as both training examples and validation tests.</li>
+        <li>Use the <strong>OpenAIFunctionGenerator</strong> to generate a function based on scenarios.</li>
+        <li>Call the function and handle potential errors appropriately.</li>
+    </ul>
+</body>
+
+</html>

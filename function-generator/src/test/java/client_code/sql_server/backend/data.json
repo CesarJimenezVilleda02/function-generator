@@ -1,0 +1,324 @@
+{
+  "users": [
+    { "name": "Alice", "email": "alice@example.com", "company": "TechCorp", "age": 29 },
+    { "name": "Bob", "email": "bob@example.com", "company": "InnovateLtd", "age": 34 },
+    {
+      "name": "Carol",
+      "email": "carol@corporate.com",
+      "company": "NextGen Solutions",
+      "age": 41
+    },
+    { "name": "Dave", "email": "dave@techworld.org", "company": "Alpha Tech", "age": 25 },
+    { "name": "Eve", "email": "eve@startup.net", "company": "StartupHub", "age": 31 },
+    {
+      "name": "Frank",
+      "email": "frank@global.co",
+      "company": "Global Enterprises",
+      "age": 38
+    },
+    { "name": "Grace", "email": "grace@education.edu", "company": "EduTech", "age": 22 },
+    { "name": "Hank", "email": "hank@finances.io", "company": "FinancePros", "age": 45 },
+    { "name": "Ivy", "email": "ivy@media.tv", "company": "MediaWorld", "age": 27 },
+    {
+      "name": "Jack",
+      "email": "jack@engineering.ai",
+      "company": "AI Innovations",
+      "age": 33
+    },
+    {
+      "name": "Karen",
+      "email": "karen@healthcare.org",
+      "company": "HealthCorp",
+      "age": 50
+    },
+    { "name": "Leo", "email": "leo@gaming.gg", "company": "GameStudios", "age": 28 },
+    { "name": "Mia", "email": "mia@lawfirm.biz", "company": "LegalExperts", "age": 37 },
+    {
+      "name": "Nina",
+      "email": "nina@designers.art",
+      "company": "CreativeDesigns",
+      "age": 24
+    },
+    {
+      "name": "Oscar",
+      "email": "oscar@automotive.me",
+      "company": "AutoDrive",
+      "age": 40
+    },
+    {
+      "name": "Paula",
+      "email": "paula@travelers.adventures",
+      "company": "Adventure Travels",
+      "age": 36
+    },
+    {
+      "name": "Quinn",
+      "email": "quinn@analytics.ai",
+      "company": "DataScience Pros",
+      "age": 32
+    },
+    { "name": "Rita", "email": "rita@biology.research", "company": "BioLabs", "age": 27 },
+    {
+      "name": "Sam",
+      "email": "sam@robotics.ai",
+      "company": "Robotic Systems",
+      "age": 42
+    },
+    {
+      "name": "Tina",
+      "email": "tina@writers.club",
+      "company": "Publishing House",
+      "age": 31
+    },
+    {
+      "name": "Uma",
+      "email": "uma@fashion.style",
+      "company": "Runway Designers",
+      "age": 26
+    },
+    {
+      "name": "Victor",
+      "email": "victor@marine.sea",
+      "company": "Ocean Explorers",
+      "age": 43
+    },
+    {
+      "name": "Wanda",
+      "email": "wanda@arts.gallery",
+      "company": "ArtGalleries Inc.",
+      "age": 39
+    },
+    {
+      "name": "Xander",
+      "email": "xander@photography.photos",
+      "company": "Capture Moments",
+      "age": 29
+    },
+    {
+      "name": "Yvonne",
+      "email": "yvonne@astronomy.space",
+      "company": "Star Observers",
+      "age": 35
+    },
+    {
+      "name": "Zack",
+      "email": "zack@music.sound",
+      "company": "Harmony Studios",
+      "age": 30
+    }
+  ],
+  "books": [
+    { "title": "1984", "author": "George Orwell", "genre": "Dystopian", "year": 1949 },
+    {
+      "title": "Animal Farm",
+      "author": "George Orwell",
+      "genre": "Political Satire",
+      "year": 1945
+    },
+    {
+      "title": "Brave New World",
+      "author": "Aldous Huxley",
+      "genre": "Dystopian",
+      "year": 1932
+    },
+    {
+      "title": "Island",
+      "author": "Aldous Huxley",
+      "genre": "Philosophical Fiction",
+      "year": 1962
+    },
+    {
+      "title": "Pride and Prejudice",
+      "author": "Jane Austen",
+      "genre": "Romance",
+      "year": 1813
+    },
+    {
+      "title": "Sense and Sensibility",
+      "author": "Jane Austen",
+      "genre": "Romance",
+      "year": 1811
+    },
+    {
+      "title": "The Great Gatsby",
+      "author": "F. Scott Fitzgerald",
+      "genre": "Tragedy",
+      "year": 1925
+    },
+    {
+      "title": "This Side of Paradise",
+      "author": "F. Scott Fitzgerald",
+      "genre": "Tragedy",
+      "year": 1920
+    },
+    {
+      "title": "Moby Dick",
+      "author": "Herman Melville",
+      "genre": "Adventure",
+      "year": 1851
+    },
+    {
+      "title": "War and Peace",
+      "author": "Leo Tolstoy",
+      "genre": "Historical Fiction",
+      "year": 1869
+    },
+    {
+      "title": "Anna Karenina",
+      "author": "Leo Tolstoy",
+      "genre": "Romance",
+      "year": 1877
+    },
+    {
+      "title": "The Catcher in the Rye",
+      "author": "J.D. Salinger",
+      "genre": "Coming-of-Age",
+      "year": 1951
+    },
+    {
+      "title": "Franny and Zooey",
+      "author": "J.D. Salinger",
+      "genre": "Drama",
+      "year": 1961
+    },
+    {
+      "title": "The Fellowship of the Ring",
+      "author": "J.R.R. Tolkien",
+      "genre": "Fantasy",
+      "year": 1954
+    },
+    {
+      "title": "The Two Towers",
+      "author": "J.R.R. Tolkien",
+      "genre": "Fantasy",
+      "year": 1954
+    },
+    {
+      "title": "The Return of the King",
+      "author": "J.R.R. Tolkien",
+      "genre": "Fantasy",
+      "year": 1955
+    },
+    {
+      "title": "The Hobbit",
+      "author": "J.R.R. Tolkien",
+      "genre": "Fantasy",
+      "year": 1937
+    },
+    {
+      "title": "Crime and Punishment",
+      "author": "Fyodor Dostoevsky",
+      "genre": "Psychological Fiction",
+      "year": 1866
+    },
+    {
+      "title": "The Brothers Karamazov",
+      "author": "Fyodor Dostoevsky",
+      "genre": "Philosophical Fiction",
+      "year": 1880
+    },
+    {
+      "title": "Don Quixote",
+      "author": "Miguel de Cervantes",
+      "genre": "Satire",
+      "year": 1605
+    },
+    {
+      "title": "The Great Divorce",
+      "author": "C.S. Lewis",
+      "genre": "Fantasy",
+      "year": 1945
+    },
+    {
+      "title": "The Screwtape Letters",
+      "author": "C.S. Lewis",
+      "genre": "Satire",
+      "year": 1942
+    },
+    {
+      "title": "Jane Eyre",
+      "author": "Charlotte Brontë",
+      "genre": "Gothic Fiction",
+      "year": 1847
+    },
+    {
+      "title": "Wuthering Heights",
+      "author": "Emily Brontë",
+      "genre": "Gothic Fiction",
+      "year": 1847
+    },
+    { "title": "Dracula", "author": "Bram Stoker", "genre": "Horror", "year": 1897 },
+    {
+      "title": "Frankenstein",
+      "author": "Mary Shelley",
+      "genre": "Horror",
+      "year": 1818
+    },
+    {
+      "title": "The Picture of Dorian Gray",
+      "author": "Oscar Wilde",
+      "genre": "Philosophical Fiction",
+      "year": 1890
+    },
+    {
+      "title": "One Hundred Years of Solitude",
+      "author": "Gabriel García Márquez",
+      "genre": "Magical Realism",
+      "year": 1967
+    },
+    {
+      "title": "Love in the Time of Cholera",
+      "author": "Gabriel García Márquez",
+      "genre": "Romance",
+      "year": 1985
+    },
+    {
+      "title": "The Alchemist",
+      "author": "Paulo Coelho",
+      "genre": "Philosophical Fiction",
+      "year": 1988
+    },
+    {
+      "title": "The Divine Comedy",
+      "author": "Dante Alighieri",
+      "genre": "Epic Poetry",
+      "year": 1320
+    },
+    {
+      "title": "Inferno",
+      "author": "Dante Alighieri",
+      "genre": "Epic Poetry",
+      "year": 1321
+    },
+    {
+      "title": "Ulysses",
+      "author": "James Joyce",
+      "genre": "Modernist Fiction",
+      "year": 1922
+    },
+    {
+      "title": "Dubliners",
+      "author": "James Joyce",
+      "genre": "Short Stories",
+      "year": 1914
+    },
+    {
+      "title": "The Sun Also Rises",
+      "author": "Ernest Hemingway",
+      "genre": "Tragedy",
+      "year": 1926
+    },
+    {
+      "title": "For Whom the Bell Tolls",
+      "author": "Ernest Hemingway",
+      "genre": "Historical Fiction",
+      "year": 1940
+    },
+    {
+      "title": "The Old Man and the Sea",
+      "author": "Ernest Hemingway",
+      "genre": "Adventure",
+      "year": 1952
+    }
+  ]
+}

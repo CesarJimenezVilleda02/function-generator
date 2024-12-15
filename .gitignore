@@ -1,0 +1,38 @@
+.env
+config.ini
+function-generator/-
+
+# Compiled class files
+out/
+*.class
+
+# IDE-specific files
+.idea/
+.vscode/
+*.iml
+.settings/
+.classpath
+.project
+
+# Build tool directories
+target/
+classes/
+
+# Package files
+*.jar
+*.war
+*.ear
+
+# Logs
+*.log
+
+# OS-specific files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+maven-javadoc-plugin-stale-data.txt
+server.db
