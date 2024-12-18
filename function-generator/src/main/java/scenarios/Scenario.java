@@ -91,7 +91,7 @@ public class Scenario<I, O> {
         }
         this.input = input;
         this.output = output;
-        this.description = (description != null && !description.isEmpty()) ? description : "No description provided";
+        this.description = description != null && !description.isEmpty() ? description : "No description provided";
     }
 
     /**

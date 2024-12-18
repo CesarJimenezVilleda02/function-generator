@@ -55,9 +55,9 @@ public class TextAnalyzerWithErrorsExample {
         // Create the function with error conditions
         Function<TextAnalysisRequest, TextAnalysisResult> textAnalyzer = FunctionGenerator
             .<TextAnalysisRequest, TextAnalysisResult>builder()
-            .withDescription("Analyze the provided text and return detailed metrics including " +
-                    "word count, character count, sentence count, and average word length. " +
-                    "Text should be in English and contain proper sentences.")
+            .withDescription("Analyze the provided text and return detailed metrics including "
+                    + "word count, character count, sentence count, and average word length. "
+                    + "Text should be in English and contain proper sentences.")
             .withInputType(TextAnalysisRequest.class)
             .withOutputType(TextAnalysisResult.class)
             .withStrategy(functionGenerator)
@@ -104,9 +104,9 @@ public class TextAnalyzerWithErrorsExample {
         // Create the function with bulk input validations using withPreExecutionCheck
         Function<TextAnalysisRequest, TextAnalysisResult> textAnalyzer = FunctionGenerator
             .<TextAnalysisRequest, TextAnalysisResult>builder()
-            .withDescription("Analyze the provided text and return detailed metrics including " +
-                    "word count, character count, sentence count, and average word length. " +
-                    "Text should be in English and contain proper sentences.")
+            .withDescription("Analyze the provided text and return detailed metrics including "
+                    + "word count, character count, sentence count, and average word length. "
+                    + "Text should be in English and contain proper sentences.")
             .withInputType(TextAnalysisRequest.class)
             .withOutputType(TextAnalysisResult.class)
             .withStrategy(functionGenerator)

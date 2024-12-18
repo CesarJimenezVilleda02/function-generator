@@ -192,8 +192,8 @@ public class OpenAIFunctionGenerator implements FunctionGenerationStrategy {
             // Parse and return the response content
             JSONObject jsonResponse = new JSONObject(response.body());
 
-            if (!jsonResponse.has("choices") ||
-                    jsonResponse.getJSONArray("choices").length() == 0) {
+            if (!jsonResponse.has("choices")
+                    || jsonResponse.getJSONArray("choices").length() == 0) {
                 throw new IllegalStateException(
                         "OpenAI API error (status: 200, type: invalid_response): Response contained no choices");
             }

@@ -10,7 +10,7 @@ import java.util.Properties;
  */
 public class ConfigLoader {
 
-    private Properties properties;
+    private final Properties properties;
 
     /**
      * Constructs a {@code ConfigLoader} with the specified configuration file path.

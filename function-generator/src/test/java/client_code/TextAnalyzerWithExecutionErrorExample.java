@@ -51,9 +51,9 @@ public class TextAnalyzerWithExecutionErrorExample {
         // Create the function with backend-interpreted error conditions
         Function<TextAnalysisRequest, TextAnalysisResult> textAnalyzer = FunctionGenerator
             .<TextAnalysisRequest, TextAnalysisResult>builder()
-            .withDescription("Analyze the provided text and return detailed metrics including " +
-                    "word count, character count, sentence count, and average word length. " +
-                    "Text should be in English and contain proper sentences.")
+            .withDescription("Analyze the provided text and return detailed metrics including "
+                    + "word count, character count, sentence count, and average word length. "
+                    + "Text should be in English and contain proper sentences.")
             .withInputType(TextAnalysisRequest.class)
             .withOutputType(TextAnalysisResult.class)
             .withStrategy(functionGenerator)

@@ -102,7 +102,9 @@ public class SimpleServer extends NanoHTTPD {
                     String columnName = rs.getMetaData().getColumnName(i);
                     String columnValue = rs.getString(i);
                     response.append("\"").append(columnName).append("\":\"").append(columnValue).append("\"");
-                    if (i < columnCount) response.append(",");
+                    if (i < columnCount) {
+                        response.append(",");
+                    }
                 }
                 response.append("},");
             }
@@ -171,4 +173,3 @@ public class SimpleServer extends NanoHTTPD {
         }
     }
 }
-

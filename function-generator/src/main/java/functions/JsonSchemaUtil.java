@@ -32,9 +32,9 @@ final class JsonSchemaUtil {
      */
     public static String getJsonSchema(Class<?> clazz) {
         // Skip schema generation for primitive types and common classes
-        if (clazz.isPrimitive() || clazz == String.class || clazz == Integer.class || clazz == Boolean.class ||
-            clazz == Long.class || clazz == Double.class || clazz == Float.class || clazz == Byte.class ||
-            clazz == Short.class || clazz == Character.class) {
+        if (clazz.isPrimitive() || clazz == String.class || clazz == Integer.class || clazz == Boolean.class
+            || clazz == Long.class || clazz == Double.class || clazz == Float.class || clazz == Byte.class
+            || clazz == Short.class || clazz == Character.class) {
             return clazz.getSimpleName();
         }
 

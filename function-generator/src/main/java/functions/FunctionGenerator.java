@@ -149,7 +149,7 @@ public class FunctionGenerator<I, O> {
 
         System.out.println("Description: " + builder.description);
 
-        this.prompt = (builder.scenarios != null)
+        this.prompt = builder.scenarios != null
                 ? generateScenariosPrompt(builder.description.toString(), builder.scenarios)
                 : builder.description.toString();
         this.inputType = builder.inputType;
@@ -494,22 +494,30 @@ public class FunctionGenerator<I, O> {
     }
 
     private String getPrimitiveTypeName(Class<?> type) {
-        if (type == int.class)
+        if (type == int.class) {
             return "integer";
-        if (type == double.class)
+        }
+        if (type == double.class) {
             return "double";
-        if (type == boolean.class)
+        }
+        if (type == boolean.class) {
             return "boolean";
-        if (type == long.class)
+        }
+        if (type == long.class) {
             return "long";
-        if (type == float.class)
+        }
+        if (type == float.class) {
             return "float";
-        if (type == char.class)
+        }
+        if (type == char.class) {
             return "character";
-        if (type == byte.class)
+        }
+        if (type == byte.class) {
             return "byte";
-        if (type == short.class)
+        }
+        if (type == short.class) {
             return "short";
+        }
         return "unknown primitive";
     }
 
@@ -517,8 +525,8 @@ public class FunctionGenerator<I, O> {
         List<String> nlErrorConditions = new ArrayList<>();
         for (ErrorCondition<I> errorCondition : errorConditions) {
             if (errorCondition.isNaturalLanguageCondition()) {
-                nlErrorConditions.add("- Condition: " + errorCondition.getConditionDescription() +
-                        " | Error Message: " + errorCondition.getErrorMessage());
+                nlErrorConditions.add("- Condition: " + errorCondition.getConditionDescription()
+                        + " | Error Message: " + errorCondition.getErrorMessage());
             }
         }
 
@@ -826,7 +834,7 @@ public class FunctionGenerator<I, O> {
 
                             // Check if the method is annotated with @Test
                             boolean isTestMethod = method.getAnnotations().stream()
-                                    .anyMatch(annotation -> annotation.getNameAsString().equals("Test"));
+                                    .anyMatch(annotation -> "Test".equals(annotation.getNameAsString()));
 
                             if (isTestMethod) {
                                 // Append test method details to the description
@@ -894,16 +902,16 @@ public class FunctionGenerator<I, O> {
             // Find @Before/@BeforeEach methods
             String beforeBodies = allMethods.stream()
                     .filter(method -> method.getAnnotations().stream()
-                            .anyMatch(annotation -> annotation.getNameAsString().equals("Before") || 
-                                                    annotation.getNameAsString().equals("BeforeEach")))
+                            .anyMatch(annotation -> "Before".equals(annotation.getNameAsString()) 
+                                                    || "BeforeEach".equals(annotation.getNameAsString())))
                     .map(method -> method.getBody().map(Object::toString).orElse(""))
                     .reduce("", (acc, body) -> acc + body + "\n");
         
             // Find @After/@AfterEach methods
             String afterBodies = allMethods.stream()
                     .filter(method -> method.getAnnotations().stream()
-                            .anyMatch(annotation -> annotation.getNameAsString().equals("After") || 
-                                                    annotation.getNameAsString().equals("AfterEach")))
+                            .anyMatch(annotation -> "After".equals(annotation.getNameAsString()) 
+                                                    || "AfterEach".equals(annotation.getNameAsString())))
                     .map(method -> method.getBody().map(Object::toString).orElse(""))
                     .reduce("", (acc, body) -> acc + body + "\n");
         

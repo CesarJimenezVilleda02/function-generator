@@ -52,4 +52,7 @@ public class JsonLoader {
             e.printStackTrace();
         }
     }
+
+    private JsonLoader() {
+    }
 }
