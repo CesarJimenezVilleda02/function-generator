@@ -87,7 +87,7 @@ public class Scenario<I, O> {
      */
     public Scenario(I input, O output, String description) {
         if (input == null || output == null) {
-            throw new IllegalArgumentException("Input and output cannot be null.");
+            throw new NullPointerException("Input and output cannot be null.");
         }
         this.input = input;
         this.output = output;

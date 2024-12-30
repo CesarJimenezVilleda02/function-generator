@@ -1,5 +1,6 @@
 package strategies.llama;
 
+import java.io.IOException;
 import java.net.HttpRetryException;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -296,7 +297,7 @@ public class LlamaFunctionGenerator implements FunctionGenerationStrategy {
          */
         public Builder withApiKey(String apiKey) {
             if (apiKey == null || apiKey.trim().isEmpty()) {
-                throw new IllegalArgumentException("API key cannot be null or empty");
+                throw new NullPointerException("API key cannot be null or empty");
             }
             this.apiKey = apiKey;
             return this;
@@ -507,7 +508,7 @@ public class LlamaFunctionGenerator implements FunctionGenerationStrategy {
          */
         public LlamaFunctionGenerator build() {
             if (apiKey == null) {
-                throw new IllegalStateException("API key is required");
+                throw new NullPointerException("API key is required");
             }
             return new LlamaFunctionGenerator(this);
         }

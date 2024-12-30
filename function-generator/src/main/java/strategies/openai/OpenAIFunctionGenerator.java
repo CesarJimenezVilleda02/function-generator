@@ -298,7 +298,7 @@ public class OpenAIFunctionGenerator implements FunctionGenerationStrategy {
          */
         public Builder withApiKey(String apiKey) {
             if (apiKey == null || apiKey.trim().isEmpty()) {
-                throw new IllegalArgumentException("API key cannot be null or empty");
+                throw new NullPointerException("API key cannot be null or empty");
             }
             this.apiKey = apiKey;
             return this;
@@ -461,7 +461,7 @@ public class OpenAIFunctionGenerator implements FunctionGenerationStrategy {
          */
         public OpenAIFunctionGenerator build() {
             if (apiKey == null) {
-                throw new IllegalStateException("API key is required");
+                throw new NullPointerException("API key is required");
             }
             return new OpenAIFunctionGenerator(this);
         }

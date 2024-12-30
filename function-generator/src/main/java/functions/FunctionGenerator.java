@@ -138,13 +138,13 @@ public class FunctionGenerator<I, O> {
      */
     private FunctionGenerator(Builder<I, O> builder) {
         if (builder.inputType == null || builder.outputType == null) {
-            throw new IllegalStateException("Input and output types must be specified.");
+            throw new NullPointerException("Input and output types must be specified.");
         }
         if (builder.strategy == null) {
-            throw new IllegalStateException("A function generation strategy must be provided.");
+            throw new NullPointerException("A function generation strategy must be provided.");
         }
         if (builder.description == null) {
-            throw new IllegalStateException("A description must be provided.");
+            throw new NullPointerException("A description must be provided.");
         }
 
         System.out.println("Description: " + builder.description);
@@ -167,7 +167,7 @@ public class FunctionGenerator<I, O> {
      */
     private O invoke(I input) {
         if (input == null) {
-            throw new IllegalArgumentException("Input cannot be null");
+            throw new NullPointerException("Input cannot be null");
         }
         // Check user-defined error conditions
         for (ErrorCondition<I> condition : errorConditions) {
@@ -695,7 +695,7 @@ public class FunctionGenerator<I, O> {
          */
         public Builder<I, O> withPreExecutionCheck(Exception exceptionToThrow, Predicate<I> condition) {
             if (exceptionToThrow == null || condition == null) {
-                throw new IllegalArgumentException("All parameters cannot be null");
+                throw new NullPointerException("All parameters cannot be null");
             }
             ErrorCondition<I> errorCondition = new ErrorCondition<I>(exceptionToThrow, condition);
             errorConditions.add(errorCondition);
@@ -754,7 +754,7 @@ public class FunctionGenerator<I, O> {
          */
         public Builder<I, O> withExecutionError(Exception exceptionToThrow, String conditionDescription) {
             if (conditionDescription == null || exceptionToThrow == null) {
-                throw new IllegalArgumentException("All parameters cannot be null");
+                throw new NullPointerException("All parameters cannot be null");
             }
             ErrorCondition<I> errorCondition = new ErrorCondition<>(exceptionToThrow, conditionDescription);
             errorConditions.add(errorCondition);
