@@ -147,7 +147,7 @@ public class FunctionGenerator<I, O> {
             throw new NullPointerException("A description must be provided.");
         }
 
-        System.out.println("Description: " + builder.description);
+        // System.out.println("Description: " + builder.description);
 
         this.prompt = builder.scenarios != null
                 ? generateScenariosPrompt(builder.description.toString(), builder.scenarios)
