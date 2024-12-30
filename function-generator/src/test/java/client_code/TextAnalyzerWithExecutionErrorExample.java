@@ -13,13 +13,6 @@ public class TextAnalyzerWithExecutionErrorExample {
     static OpenAIFunctionGenerator functionGenerator = OpenAIFunctionGenerator.builder()
             .withApiKey(ConfigLoader.getInstance().getApiKey()).build();
 
-    // Custom exceptions for each error condition
-    public static class NullTextException extends IllegalArgumentException {
-        public NullTextException(String message) {
-            super(message);
-        }
-    }
-
     public static class EmptyTextException extends IllegalArgumentException {
         public EmptyTextException(String message) {
             super(message);
@@ -58,7 +51,7 @@ public class TextAnalyzerWithExecutionErrorExample {
             .withOutputType(TextAnalysisResult.class)
             .withStrategy(functionGenerator)
             .withExecutionError(
-                new NullTextException("Text analysis request or text cannot be null"),
+                new NullPointerException("Text analysis request or text cannot be null"),
                 "Input request or text is null")
             .withExecutionError(
                 new EmptyTextException("Text cannot be empty or contain only whitespace"),
@@ -105,7 +98,7 @@ public class TextAnalyzerWithExecutionErrorExample {
             TextAnalysisResult result = analyzer.apply(request);
             System.out.println("Analysis Result: " + result);
 
-        } catch (NullTextException e) {
+        } catch (NullPointerException e) {
             System.err.println("Null text error: " + e.getMessage());
         } catch (EmptyTextException e) {
             System.err.println("Empty text error: " + e.getMessage());

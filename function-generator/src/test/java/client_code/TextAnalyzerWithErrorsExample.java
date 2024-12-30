@@ -15,13 +15,6 @@ public class TextAnalyzerWithErrorsExample {
     static LlamaFunctionGenerator functionGenerator = LlamaFunctionGenerator.builder()
             .withApiKey(ConfigLoader.getInstance().getApiKey()).build();
 
-    // Custom exceptions for each validation case
-    public static class NullTextException extends IllegalArgumentException {
-        public NullTextException(String message) {
-            super(message);
-        }
-    }
-
     public static class EmptyTextException extends IllegalArgumentException {
         public EmptyTextException(String message) {
             super(message);
@@ -61,7 +54,7 @@ public class TextAnalyzerWithErrorsExample {
             .withInputType(TextAnalysisRequest.class)
             .withOutputType(TextAnalysisResult.class)
             .withStrategy(functionGenerator)
-            .withPreExecutionCheck(new NullTextException("Text analysis request or text cannot be null"),
+            .withPreExecutionCheck(new NullPointerException("Text analysis request or text cannot be null"),
                 request -> request == null || request.getText() == null)
             .withPreExecutionCheck(new EmptyTextException("Text cannot be empty or contain only whitespace"),
                 request -> request.getText().trim().isEmpty())
@@ -110,7 +103,7 @@ public class TextAnalyzerWithErrorsExample {
             .withInputType(TextAnalysisRequest.class)
             .withOutputType(TextAnalysisResult.class)
             .withStrategy(functionGenerator)
-            .withPreExecutionCheck(new NullTextException("Text analysis request or text cannot be null"),
+            .withPreExecutionCheck(new NullPointerException("Text analysis request or text cannot be null"),
                         request -> request == null || request.getText() == null)
             .withPreExecutionCheck(new EmptyTextException(
                         "Text cannot be empty or contain only whitespace"),
@@ -158,7 +151,7 @@ public class TextAnalyzerWithErrorsExample {
             TextAnalysisResult result = analyzer.apply(request);
             System.out.println("Analysis Result: " + result);
 
-        } catch (NullTextException e) {
+        } catch (NullPointerException e) {
             System.err.println("Null text error: " + e.getMessage());
         } catch (EmptyTextException e) {
             System.err.println("Empty text error: " + e.getMessage());
