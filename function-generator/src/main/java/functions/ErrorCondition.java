@@ -58,7 +58,7 @@ class ErrorCondition<I> {
      */
     public ErrorCondition(Exception exception, Predicate<I> condition) {
         if (exception == null || condition == null) {
-            throw new IllegalArgumentException("All parameters must be non-null");
+            throw new NullPointerException("All parameters must be non-null");
         }
         this.exceptionClass = exception.getClass();
         this.condition = condition;
@@ -85,7 +85,7 @@ class ErrorCondition<I> {
     public ErrorCondition(Exception exception,
             String conditionDescription) {
         if (exception == null || conditionDescription == null) {
-            throw new IllegalArgumentException("All parameters must be non-null");
+            throw new NullPointerException("All parameters must be non-null");
         }
         this.exceptionClass = exception.getClass();
         this.condition = null;
