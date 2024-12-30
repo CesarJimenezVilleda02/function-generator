@@ -584,9 +584,9 @@ public class FunctionGenerator<I, O> {
          *         selected stragey.</li>
          * </ul>
          *
-         * @throws IllegalStateException if input type is missing.
-         * @throws IllegalStateException if output type is missing.
-         * @throws IllegalStateException if the function generation strategy is missing.
+         * @throws NullPointerException if input type is missing.
+         * @throws NullPointerException if output type is missing.
+         * @throws NullPointerException if the function generation strategy is missing.
          */
         public Function<I, O> build() {
             FunctionGenerator<I, O> FunctionGenerator = new FunctionGenerator<I, O>(this);

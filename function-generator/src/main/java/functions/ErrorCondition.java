@@ -51,7 +51,7 @@ class ErrorCondition<I> {
      * @param condition      the predicate that defines when an error should occur
      * @param errorMessage   the message to include in the exception when the
      *                       condition is met
-     * @throws IllegalArgumentException if any parameter is null or if the exception
+     * @throws NullPointerException if any parameter is null or if the exception
      *                                  class
      *                                  doesn't have a constructor that takes a
      *                                  string message
@@ -77,7 +77,7 @@ class ErrorCondition<I> {
      * @param conditionDescription the description of the condition
      * @param errorMessage         the message to include in the exception when the
      *                             condition is met
-     * @throws IllegalArgumentException if any parameter is null or if the exception
+     * @throws NullPointerException if any parameter is null or if the exception
      *                                  class
      *                                  doesn't have a constructor that takes a
      *                                  string message

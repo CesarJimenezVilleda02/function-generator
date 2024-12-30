@@ -83,7 +83,7 @@ public class Scenario<I, O> {
      * @param input       the input value
      * @param output      the expected output value
      * @param description a description of the scenario
-     * @throws IllegalArgumentException if input or output is null
+     * @throws NullPointerException if input or output is null
      */
     public Scenario(I input, O output, String description) {
         if (input == null || output == null) {
