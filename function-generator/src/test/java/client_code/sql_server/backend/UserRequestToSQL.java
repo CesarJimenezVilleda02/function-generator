@@ -20,22 +20,22 @@ public class UserRequestToSQL {
     public UserRequestToSQL() {
         // Define scenarios for converting user input to SQL queries for books
         List<Scenario<String, String>> bookScenarios = Arrays.asList(
-            new Scenario<>(
+            Scenario.withDescription(
                 "I want to see all books",
                 "SELECT * FROM books",
                 "When the user asks to see all books, generate a SELECT query for the books table."
             ),
-            new Scenario<>(
+            Scenario.withDescription(
                 "I want to find books written by George Orwell",
                 "SELECT * FROM books WHERE author = 'George Orwell'",
                 "When the user requests books by a specific author, generate a SELECT query with a WHERE clause for the author."
             ),
-            new Scenario<>(
+            Scenario.withDescription(
                 "Show me books published in 1984",
                 "SELECT * FROM books WHERE year = 1984",
                 "When the user requests books published in a specific year, generate a SELECT query with a WHERE clause for the publication year."
             ),
-            new Scenario<>(
+            Scenario.withDescription(
                 "Find books with the word Harry in the title",
                 "SELECT * FROM books WHERE title LIKE '%Harry%'",
                 "When the user requests books with a keyword in the title, generate a SELECT query with a LIKE clause."
@@ -44,22 +44,22 @@ public class UserRequestToSQL {
 
         // Define scenarios for converting user input to SQL queries for users
         List<Scenario<String, String>> userScenarios = Arrays.asList(
-            new Scenario<>(
+            Scenario.withDescription(
                 "I want to see all users",
                 "SELECT * FROM users",
                 "When the user asks to see all users, generate a SELECT query for the users table."
             ),
-            new Scenario<>(
+            Scenario.withDescription(
                 "Find users with the name Alice",
                 "SELECT * FROM users WHERE name = 'Alice'",
                 "When the user requests users with a specific name, generate a SELECT query with a WHERE clause for the name."
             ),
-            new Scenario<>(
+            Scenario.withDescription(
                 "Show me users with an email containing example",
                 "SELECT * FROM users WHERE email LIKE '%example%'",
                 "When the user requests users with a keyword in their email, generate a SELECT query with a LIKE clause."
             ),
-            new Scenario<>(
+            Scenario.withDescription(
                 "I want to look for users sorted by name",
                 "SELECT * FROM users ORDER BY name ASC",
                 "When the user requests users sorted by name, generate a SELECT query with an ORDER BY clause."
