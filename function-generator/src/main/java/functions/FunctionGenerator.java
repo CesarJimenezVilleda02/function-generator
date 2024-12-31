@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.function.UnaryOperator;
 
 import com.github.javaparser.JavaParser;
 import com.github.javaparser.ParseResult;
@@ -563,39 +564,6 @@ public class FunctionGenerator<I, O> {
         private List<Scenario<I, O>> scenarios = new ArrayList<>();
         private List<ErrorCondition<I>> errorConditions = new ArrayList<>();
 
-        /**
-         * Builds and returns a {@link Function} instance using the configured parameters.
-         * <p>
-         * The returned {@code Function<I, O>} behaves as follows:
-         * <ul>
-         *     <li>If pre-execution checks are defined using {@code withPreExecutionCheck}, the function
-         *         will throw exceptions during these checks if the input does not satisfy the criteria.</li>
-         *     <li>If an execution error handler is configured using {@code withExecutionError}, exceptions
-         *         during execution are handled according to this configuration.</li>
-         *     <li>The specific exceptions that may be thrown depend on the selected
-         *         {@code FunctionGenerationStrategy.generateFunctionOutput}.</li>
-         * </ul>
-         *
-         * @return a thread-safe {@code Function<I, O>} instance with behavior defined by the configured parameters. <br><br>
-         * Exceptions Thrown by the Returned Function:
-         * <ul>
-         *     <li>{@link IllegalStateException} - if the JSON string from the function generation strategy
-         *         cannot be parsed into the selected output type.</li>
-         *     <li>Other exceptions as defined by the pre-execution checks or execution errors,as well as by the
-         *         selected stragey.</li>
-         * </ul>
-         *
-         * @throws NullPointerException if input type is missing.
-         * @throws NullPointerException if output type is missing.
-         * @throws NullPointerException if the function generation strategy is missing.
-         */
-        public Function<I, O> build() {
-            FunctionGenerator<I, O> FunctionGenerator = new FunctionGenerator<I, O>(this);
-            return input -> {
-                return FunctionGenerator.invoke(input);
-            };
-        }
-
         private Builder(Class<I> inputType, Class<O> outputType) {
             this.inputType = inputType;
             this.outputType = outputType;
@@ -1024,6 +992,68 @@ public class FunctionGenerator<I, O> {
             }
         
             return classes;
+        }
+
+        /**
+         * Builds and returns a {@link Function} instance using the configured parameters.
+         * <p>
+         * The returned {@code Function<I, O>} behaves as follows:
+         * <ul>
+         *     <li>If pre-execution checks are defined using {@code withPreExecutionCheck}, the function
+         *         will throw exceptions during these checks if the input does not satisfy the criteria.</li>
+         *     <li>If an execution error handler is configured using {@code withExecutionError}, exceptions
+         *         during execution are handled according to this configuration.</li>
+         *     <li>The specific exceptions that may be thrown depend on the selected
+         *         {@code FunctionGenerationStrategy.generateFunctionOutput}.</li>
+         * </ul>
+         *
+         * @return a thread-safe {@code Function<I, O>} instance with behavior defined by the configured parameters. <br><br>
+         * Exceptions Thrown by the Returned Function:
+         * <ul>
+         *     <li>{@link IllegalStateException} - if the JSON string from the function generation strategy
+         *         cannot be parsed into the selected output type.</li>
+         *     <li>Other exceptions as defined by the pre-execution checks or execution errors,as well as by the
+         *         selected stragey.</li>
+         * </ul>
+         *
+         * @throws NullPointerException if input type is missing.
+         * @throws NullPointerException if output type is missing.
+         * @throws NullPointerException if the function generation strategy is missing.
+         */
+        public Function<I, O> build() {
+            FunctionGenerator<I, O> FunctionGenerator = new FunctionGenerator<I, O>(this);
+            return input -> {
+                return FunctionGenerator.invoke(input);
+            };
+        }
+
+        /**
+         * Builds and returns a {@code Predicate<I>} instance if the output type is {@code Boolean.class}.
+         *
+         * @return a {@code Predicate<I>} instance built from the configured parameters.
+         * @throws IllegalStateException if the output type is not {@code Boolean.class}.
+         */
+        public Predicate<I> buildPredicate() {
+            if (!outputType.equals(Boolean.class)) {
+                throw new IllegalStateException("Output type must be Boolean.class to build a Predicate.");
+            }
+            Function<I, O> function = this.build();
+            return input -> (Boolean) function.apply(input);
+        }
+
+        /**
+         * Builds and returns a {@code UnaryOperator<I>} instance if the input type and output type are the same.
+         *
+         * @return a {@code UnaryOperator<I>} instance built from the configured parameters.
+         * @throws IllegalStateException if the input type and output type are not the same.
+         */
+        @SuppressWarnings("unchecked")
+        public UnaryOperator<I> buildUnaryOperator() {
+            if (!inputType.equals(outputType)) {
+                throw new IllegalStateException("Input type and output type must be the same to build a UnaryOperator.");
+            }
+            Function<I, O> function = this.build();
+            return input -> (I) function.apply(input);
         }
     }
 }

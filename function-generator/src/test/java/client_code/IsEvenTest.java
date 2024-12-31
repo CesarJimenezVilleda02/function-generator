@@ -9,21 +9,22 @@ import org.junit.After;
 import org.junit.Test; // Import JUnit Test annotation
 import static org.junit.Assert.*; // Import JUnit assert methods
 
-import java.util.function.Function;
+// import java.util.function.Function;
+import java.util.function.Predicate;
 
 public class IsEvenTest {
     public static void main(String[] args) {
         OpenAIFunctionGenerator functionGenerator = OpenAIFunctionGenerator.builder().withApiKey(ConfigLoader.getInstance().getApiKey()).build();
-        Function<Integer, Boolean> isEven = FunctionGenerator.builder(Integer.class,Boolean.class)
+        Predicate<Integer> isEven = FunctionGenerator.builder(Integer.class,Boolean.class)
             // .withDescription("Determines if a given integer is even.") // Add description
             .withStrategy(functionGenerator)
             .withTestClass(IsEvenTest.class)
-            .build();
+            .buildPredicate();
 
         // Test the generated function
         System.out.println("\nTesting Generated Function:");
-        System.out.println("2 is even? " + isEven.apply(2));
-        System.out.println("5 is even? " + isEven.apply(5));
+        System.out.println("2 is even? " + isEven.test(2));
+        System.out.println("5 is even? " + isEven.test(5));
     }
 
     // Dummy function for TDD; Not implemented yet
