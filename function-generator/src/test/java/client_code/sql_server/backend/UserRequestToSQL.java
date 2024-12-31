@@ -70,22 +70,18 @@ public class UserRequestToSQL {
         OpenAIFunctionGenerator functionGenerator = OpenAIFunctionGenerator.builder().withApiKey(config.getApiKey()).build();;
 
         // Build the bookRequestToSQLFunction
-        this.bookRequestToSQLFunction = FunctionGenerator.<String, String>builder()
+        this.bookRequestToSQLFunction = FunctionGenerator.builder(String.class, String.class)
             .withDescription("Converts user input into SQL queries for the books table. Convert user input to title case before processing. For text queries, do not be case sensitive.")
             .withScenarios(bookScenarios)
-            .withInputType(String.class)
-            .withOutputType(String.class)
             .withStrategy(functionGenerator)
             .withExecutionError(new IllegalArgumentException( "Only search queries are allowed"), "User should not be able to create, modify or update records")
             .withExecutionError(new IllegalArgumentException("The data requested is not in the allowed columns"), "User should only query for data in title, author, genre and year columns")
             .build();
 
         // Build the userRequestToSQLFunction
-        this.userRequestToSQLFunction = FunctionGenerator.<String, String>builder()
+        this.userRequestToSQLFunction = FunctionGenerator.builder(String.class, String.class)
             .withDescription("Converts user input into SQL queries for the users table. Convert user input to title case before processing. For text queries, do not be case sensitive.")
             .withScenarios(userScenarios)
-            .withInputType(String.class)
-            .withOutputType(String.class)
             .withStrategy(functionGenerator)
             .withExecutionError(new IllegalArgumentException("Only seach queries are allowed"), "User should not be able to create, modify or update records")
             .withExecutionError(new IllegalArgumentException("The data requested is not in the allowed columns"), "User should only query for data in name, email, company and age columns")

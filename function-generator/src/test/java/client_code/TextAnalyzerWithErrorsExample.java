@@ -47,12 +47,10 @@ public class TextAnalyzerWithErrorsExample {
 
         // Create the function with error conditions
         Function<TextAnalysisRequest, TextAnalysisResult> textAnalyzer = FunctionGenerator
-            .<TextAnalysisRequest, TextAnalysisResult>builder()
+            .builder(TextAnalysisRequest.class,TextAnalysisResult.class)
             .withDescription("Analyze the provided text and return detailed metrics including "
                     + "word count, character count, sentence count, and average word length. "
                     + "Text should be in English and contain proper sentences.")
-            .withInputType(TextAnalysisRequest.class)
-            .withOutputType(TextAnalysisResult.class)
             .withStrategy(functionGenerator)
             .withPreExecutionCheck(new NullPointerException("Text analysis request or text cannot be null"),
                 request -> request == null || request.getText() == null)
@@ -96,12 +94,10 @@ public class TextAnalyzerWithErrorsExample {
     public static void textAnalyzerWithBulkValidations() {
         // Create the function with bulk input validations using withPreExecutionCheck
         Function<TextAnalysisRequest, TextAnalysisResult> textAnalyzer = FunctionGenerator
-            .<TextAnalysisRequest, TextAnalysisResult>builder()
+            .builder(TextAnalysisRequest.class,TextAnalysisResult.class)
             .withDescription("Analyze the provided text and return detailed metrics including "
                     + "word count, character count, sentence count, and average word length. "
                     + "Text should be in English and contain proper sentences.")
-            .withInputType(TextAnalysisRequest.class)
-            .withOutputType(TextAnalysisResult.class)
             .withStrategy(functionGenerator)
             .withPreExecutionCheck(new NullPointerException("Text analysis request or text cannot be null"),
                         request -> request == null || request.getText() == null)
