@@ -13,9 +13,7 @@ import java.util.function.Function;
 public class MathProofGeneratorTest {
     public static void main(String[] args) {
         OpenAIFunctionGenerator functionGenerator = OpenAIFunctionGenerator.builder().withApiKey(ConfigLoader.getInstance().getApiKey()).build();
-        Function<String, String> induction = FunctionGenerator.<String, String>builder()
-            .withInputType(String.class)        // Specify input type
-            .withOutputType(String.class)       // Specify output type
+        Function<String, String> induction = FunctionGenerator.builder(String.class,String.class)       // Specify output type
             .withStrategy(functionGenerator)
             .withTestClass(MathProofGeneratorTest.class)
             .build();

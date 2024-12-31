@@ -50,11 +50,11 @@ public class RomanNumeralConverterScenarioExample {
     public static void main(String[] args) {
         // Define test scenarios
         List<Scenario<Integer, String>> scenarios = Arrays.asList(
-            new Scenario<>(1, "I", "Basic single digit"),
-            new Scenario<>(4, "IV", "Subtractive notation"),
-            new Scenario<>(9, "IX", "Subtractive notation"),
-            new Scenario<>(49, "XLIX", "Complex number"),
-            new Scenario<>(999, "CMXCIX", "Largest valid number")
+            Scenario.withDescription(1, "I", "Basic single digit"),
+            Scenario.withDescription(4, "IV", "Subtractive notation"),
+            Scenario.withDescription(9, "IX", "Subtractive notation"),
+            Scenario.withDescription(49, "XLIX", "Complex number"),
+            Scenario.withDescription(999, "CMXCIX", "Largest valid number")
         );
 
         try {

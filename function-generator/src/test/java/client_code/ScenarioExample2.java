@@ -70,7 +70,7 @@ public class ScenarioExample2 {
     private static List<Scenario<SupportContext, String>> createScenarios() {
         return Arrays.asList(
             // Premium customer scenarios
-            new Scenario<>(
+            Scenario.withDescription(
                 new SupportContext(CustomerInquiry.BILLING_ISSUE, "PREMIUM", 0, true, false),
                 "I understand you're having a billing concern with your recent purchase. As a premium "
                 + "member, your issue is my top priority. I have full access to your account history "
@@ -78,7 +78,7 @@ public class ScenarioExample2 {
                 "First contact from premium customer about recent purchase"
             ),
             
-            new Scenario<>(
+            Scenario.withDescription(
                 new SupportContext(CustomerInquiry.TECHNICAL_PROBLEM, "PREMIUM", 2, true, true),
                 "I see this is your third contact about a technical issue. As a premium member, "
                 + "I'll escalate this to our senior technical team immediately, even though it's the weekend. "
@@ -88,7 +88,7 @@ public class ScenarioExample2 {
             ),
 
             // Standard customer scenarios
-            new Scenario<>(
+            Scenario.withDescription(
                 new SupportContext(CustomerInquiry.REFUND_REQUEST, "STANDARD", 0, true, false),
                 "I'll help you with your refund request for your recent purchase. First, I need to "
                 + "locate your order details. Please provide your order number. Standard processing time "
@@ -97,7 +97,7 @@ public class ScenarioExample2 {
             ),
 
             // Basic customer scenarios
-            new Scenario<>(
+            Scenario.withDescription(
                 new SupportContext(CustomerInquiry.PRODUCT_QUESTION, "BASIC", 0, false, true),
                 "Thank you for your product question. As it's currently the weekend, our response "
                 + "time might be slightly longer than usual. I'll do my best to help you right away. "
@@ -106,7 +106,7 @@ public class ScenarioExample2 {
             ),
 
             // Multiple contacts scenarios
-            new Scenario<>(
+            Scenario.withDescription(
                 new SupportContext(CustomerInquiry.BILLING_ISSUE, "STANDARD", 3, false, false),
                 "I notice this is your fourth contact about billing, and I want to assure you that "
                 + "I'll do everything possible to resolve this ongoing issue. I've reviewed your previous "

@@ -21,17 +21,17 @@ public class ScenarioExample1 {
     public static void main(String[] args) {
         // Create scenarios with descriptions
         List<Scenario<NetworkCondition, String>> scenarios = Arrays.asList(
-            new Scenario<>(
+            Scenario.withDescription(
                 NetworkCondition.STABLE,
                 "Transaction processed successfully",
                 "When network is stable, transactions should process immediately"
             ),
-            new Scenario<>(
+            Scenario.withDescription(
                 NetworkCondition.SLOW,
                 "Transaction delayed - retrying",
                 "When network is slow, implement retry logic with appropriate delay"
             ),
-            new Scenario<>(
+            Scenario.withDescription(
                 NetworkCondition.DOWN,
                 "Transaction failed - network unavailable",
                 "When network is down, fail gracefully with appropriate error message"

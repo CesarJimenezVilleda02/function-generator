@@ -67,17 +67,6 @@ public class Scenario<I, O> {
     private final String description;
     
     /**
-     * Constructs a new {@code Scenario} with the specified input and expected output.
-     *
-     * @param input  the input value
-     * @param output the expected output value
-     * @throws IllegalArgumentException if input or output is null
-     */
-    public Scenario(I input, O output) {
-        this(input, output, "");
-    }
-    
-    /**
      * Constructs a new {@code Scenario} with the specified input, output, and description.
      *
      * @param input       the input value
@@ -85,13 +74,48 @@ public class Scenario<I, O> {
      * @param description a description of the scenario
      * @throws NullPointerException if input or output is null
      */
-    public Scenario(I input, O output, String description) {
+    private Scenario(I input, O output, String description) {
         if (input == null || output == null) {
             throw new NullPointerException("Input and output cannot be null.");
         }
         this.input = input;
         this.output = output;
-        this.description = description != null && !description.isEmpty() ? description : "No description provided";
+        this.description = description != null ? description : "";
+    }
+
+    /**
+     * Static factory method to create a {@code Scenario} with the specified input, output, and description.
+     *
+     * @param input       the input value
+     * @param output      the expected output value
+     * @param description a description of the scenario
+     * @param <I>         the type of the input
+     * @param <O>         the type of the output
+     * @return a new {@code Scenario} instance
+     * @throws NullPointerException if input or output is null
+     */
+    public static <I, O> Scenario<I, O> withDescription(I input, O output, String description) {
+        if (input == null || output == null) {
+            throw new NullPointerException("Input and output cannot be null.");
+        }
+        return new Scenario<>(input, output, description != null ? description : "");
+    }
+
+    /**
+     * Static factory method to create a {@code Scenario} with the specified input and output.
+     *
+     * @param input  the input value
+     * @param output the expected output value
+     * @param <I>    the type of the input
+     * @param <O>    the type of the output
+     * @return a new {@code Scenario} instance
+     * @throws NullPointerException if input or output is null
+     */
+    public static <I, O> Scenario<I, O> of(I input, O output) {
+        if (input == null || output == null) {
+            throw new NullPointerException("Input and output cannot be null.");
+        }
+        return new Scenario<>(input, output, "");
     }
 
     /**
