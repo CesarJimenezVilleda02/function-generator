@@ -22,7 +22,7 @@ public class MathProofGeneratorTest {
 
         // Test the generated function
         System.out.println("\nTesting Generated Function:");
-        System.out.println("the proof:" + induction.apply("Prove 2^n >= 2n"));
+        System.out.println("Prove 2^n >= 2n:\n" + induction.apply("Prove 2^n >= 2n"));
     }
 
     private class MathProofGenerator {
