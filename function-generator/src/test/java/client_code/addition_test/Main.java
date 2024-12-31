@@ -11,9 +11,7 @@ public class Main {
     public static void main(String[] args) {
         Package pkg = Main.class.getPackage();
         OpenAIFunctionGenerator functionGenerator = OpenAIFunctionGenerator.builder().withApiKey(ConfigLoader.getInstance().getApiKey()).build();
-        Function<Integer[], Integer> add = FunctionGenerator.<Integer[], Integer>builder()
-            .withInputType(Integer[].class)        // Specify input type
-            .withOutputType(Integer.class)       // Specify output type
+        Function<Integer[], Integer> add = FunctionGenerator.builder(Integer[].class,Integer.class)
             .withStrategy(functionGenerator)
             .withTestPackage(pkg)
             .build();

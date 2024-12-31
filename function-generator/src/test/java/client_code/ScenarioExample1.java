@@ -39,12 +39,10 @@ public class ScenarioExample1 {
         );
 
         // Create the AI function using FunctionGenerator
-        Function<NetworkCondition, String> transactionHandler = FunctionGenerator.<NetworkCondition, String>builder()
+        Function<NetworkCondition, String> transactionHandler = FunctionGenerator.builder(NetworkCondition.class,String.class)
             .withDescription("Handle financial transactions under various network conditions, implementing appropriate "
                              + "retry logic and error handling based on the network state.")
             .withScenarios(scenarios)
-            .withInputType(NetworkCondition.class)
-            .withOutputType(String.class)
             .withStrategy(functionGenerator)
             .build();
 

@@ -63,11 +63,9 @@ import java.util.Enumeration;
  *             .build();
  * 
  *         // Step 3: Use FunctionGenerator to build a function
- *         Function<String, String> bookRequestToSQLFunction = FunctionGenerator.<String, String>builder()
+ *         Function<String, String> bookRequestToSQLFunction = FunctionGenerator.builder(String.class, String.class)
  *             .withDescription("Converts user input into SQL queries for the books table. Handle text queries in a case-insensitive manner.")
  *             .withScenarios(bookScenarios)
- *             .withInputType(String.class)
- *             .withOutputType(String.class)
  *             .withStrategy(functionGenerator)
  *             .build();
  * 
@@ -120,17 +118,6 @@ public class FunctionGenerator<I, O> {
     private static class ErrorResponse {
         String error;
         String message;
-    }
-
-    /**
-     * Creates a new instance of the builder.
-     *
-     * @param <I> the input type
-     * @param <O> the output type
-     * @return a new instance of {@code FunctionGenerator<I, O>}
-     */
-    public static <I, O> Builder<I, O> builder() {
-        return new Builder<I, O>();
     }
 
     /**
@@ -543,6 +530,19 @@ public class FunctionGenerator<I, O> {
     }
 
     /**
+     * Creates and returns a new builder for constructing a function generator.
+     *
+     * @param <J> the type of the input to the function
+     * @param <K> the type of the output from the function
+     * @param inputType the {@link Class} representing the input type of the function
+     * @param outputType the {@link Class} representing the output type of the function
+     * @return a new instance of {@code Builder} parameterized with {@code <J, K>}
+     */
+    public static <J, K> Builder<J, K> builder(Class<J> inputType, Class<K> outputType) {
+        return new Builder<>(inputType, outputType);
+    }
+
+    /**
      * A builder for creating functions using descriptions, scenarios,
      * test classes, or custom strategies.
      * <p>
@@ -596,28 +596,9 @@ public class FunctionGenerator<I, O> {
             };
         }
 
-        /**
-         * Sets the input type for the function. The input type can be specified by calling this method once. Calling this method multiple times will override the previous input type.
-         * Must coincide with the input type of the function.
-         *
-         * @param inputType the class of the input type {@code I}
-         * @return this builder instance
-         */
-        public Builder<I, O> withInputType(Class<I> inputType) {
+        private Builder(Class<I> inputType, Class<O> outputType) {
             this.inputType = inputType;
-            return this;
-        }
-
-        /**
-         * Sets the output type for the function. The output type can be specified by calling this method once, calling this method multiple times will override the previous output type.
-         *Must coincide with the output type of the function.
-         * 
-         * @param outputType the class of the output type {@code O}
-         * @return this builder instance
-         */
-        public Builder<I, O> withOutputType(Class<O> outputType) {
             this.outputType = outputType;
-            return this;
         }
 
         /**
@@ -670,10 +651,8 @@ public class FunctionGenerator<I, O> {
          *
          * <pre>{@code
          * // Build the function generator with the validation condition
-         * Function<String, Integer> generator = FunctionGenerator.<String, Integer>builder()
+         * Function<String, Integer> generator = FunctionGenerator.builder(String.class,Integer.class)
          *         .withDescription("Parses an integer from a string")
-         *         .withInputType(String.class)
-         *         .withOutputType(Integer.class)
          *         .withStrategy(strategy)
          *         // Define a validation to check for null input
          *         .withPreExecutionCheck(
@@ -722,10 +701,8 @@ public class FunctionGenerator<I, O> {
          *
          * <pre>{@code
          * // Build the function generator with a backend-interpreted error condition
-         * Function<String, String> generator = FunctionGenerator.<String, String>builder()
+         * Function<String, String> generator = FunctionGenerator.builder(String.class, String.class)
          *         .withDescription("Converts a string to uppercase")
-         *         .withInputType(String.class)
-         *         .withOutputType(String.class)
          *         .withStrategy(strategy)
          *         .withExecutionError(
          *             new IllegalArgumentException("Input contains prohibited content"),
@@ -772,9 +749,7 @@ public class FunctionGenerator<I, O> {
          * 
          * <p>Usage:</p>
          * <pre>{@code
-         * Function<Integer, Boolean> isEven = FunctionGenerator.<Integer, Boolean>builder()
-         *     .withInputType(Integer.class)        // Specify input type
-         *     .withOutputType(Boolean.class)       // Specify output type
+         * Function<Integer, Boolean> isEven = FunctionGenerator.builder(Integer.class, Boolean.class)
          *     .withStrategy(functionGenerator)    // Specify strategy
          *     .withTestClass(IsEvenTest.class)    // Specify the test class
          *     .withTestClass(IsEvenTestExceptions.class)    // Specify an additional test class
@@ -947,9 +922,7 @@ public class FunctionGenerator<I, O> {
          * 
          * <p>Usage:</p>
          * <pre>{@code
-         * Function<Integer, Boolean> isEven = FunctionGenerator.<Integer, Boolean>builder()
-         *     .withInputType(Integer.class)        // Specify input type
-         *     .withOutputType(Boolean.class)       // Specify output type
+         * Function<Integer, Boolean> isEven = FunctionGenerator.builder(Integer.class, Boolean.class)
          *     .withStrategy(functionGenerator)    // Specify strategy
          *     .withTestPackage(IsEvenTests.class.getPackage()) // Specify the package containing test classes
          *     .build();

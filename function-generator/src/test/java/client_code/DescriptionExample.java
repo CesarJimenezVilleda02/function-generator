@@ -23,10 +23,8 @@ public class DescriptionExample {
 
      public static void toneAnalyzer() {
         // Use FunctionGenerator to create a function
-        Function<String, Emotion> toneAnalyzer = FunctionGenerator.<String, Emotion>builder()
+        Function<String, Emotion> toneAnalyzer = FunctionGenerator.builder(String.class, Emotion.class)
             .withDescription("Analyze the tone of a given text and return the emotion as an enum. Possible emotions are HAPPY, SAD, ANGRY, and NEUTRAL.")
-            .withInputType(String.class)
-            .withOutputType(Emotion.class)
             .withStrategy(functionGenerator)
             .build();
 
@@ -47,10 +45,8 @@ public class DescriptionExample {
 
     public static void verbIdentifier() {
         // Use FunctionGenerator to create a function
-        Function<String, String[]> verbIdentifier = FunctionGenerator.<String, String[]>builder()
+        Function<String, String[]> verbIdentifier = FunctionGenerator.builder(String.class, String[].class)
             .withDescription("Identify all verbs in the given text and return them as an array of strings.")
-            .withInputType(String.class)
-            .withOutputType(String[].class)
             .withStrategy(functionGenerator)
             .build();
 
@@ -114,10 +110,8 @@ public class DescriptionExample {
 
     public static void textAnalyzer() {
         // Use FunctionGenerator to create a function
-        Function<TextAnalysisRequest, TextAnalysisResult> textAnalyzer = FunctionGenerator.<TextAnalysisRequest, TextAnalysisResult>builder()
+        Function<TextAnalysisRequest, TextAnalysisResult> textAnalyzer = FunctionGenerator.builder(TextAnalysisRequest.class, TextAnalysisResult.class)
             .withDescription("Analyze the provided text and return the word count and character count.")
-            .withInputType(TextAnalysisRequest.class)
-            .withOutputType(TextAnalysisResult.class)
             .withStrategy(functionGenerator)
             .build();
 

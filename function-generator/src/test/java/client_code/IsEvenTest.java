@@ -14,9 +14,7 @@ import java.util.function.Function;
 public class IsEvenTest {
     public static void main(String[] args) {
         OpenAIFunctionGenerator functionGenerator = OpenAIFunctionGenerator.builder().withApiKey(ConfigLoader.getInstance().getApiKey()).build();
-        Function<Integer, Boolean> isEven = FunctionGenerator.<Integer, Boolean>builder()
-            .withInputType(Integer.class)        // Specify input type
-            .withOutputType(Boolean.class)       // Specify output type
+        Function<Integer, Boolean> isEven = FunctionGenerator.builder(Integer.class,Boolean.class)
             // .withDescription("Determines if a given integer is even.") // Add description
             .withStrategy(functionGenerator)
             .withTestClass(IsEvenTest.class)

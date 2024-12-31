@@ -51,7 +51,7 @@ public class ScenarioExample2 {
         List<Scenario<SupportContext, String>> scenarios = createScenarios();
 
         // Create the AI function for customer support using FunctionGenerator
-        Function<SupportContext, String> supportAgent = FunctionGenerator.<SupportContext, String>builder()
+        Function<SupportContext, String> supportAgent = FunctionGenerator.builder(SupportContext.class, String.class)
             .withDescription("Generate appropriate customer service responses based on the context provided. "
                              + "Responses should be professional, empathetic, and tailored to the customer's situation. "
                              + "Consider the customer's tier, contact history, recent purchase status, and whether "
@@ -60,8 +60,6 @@ public class ScenarioExample2 {
                              + "need more detailed assistance. Weekend support should acknowledge potential delays "
                              + "for non-premium customers.")
             .withScenarios(scenarios)
-            .withInputType(SupportContext.class)
-            .withOutputType(String.class)
             .withStrategy(functionGenerator)
             .build();
 
