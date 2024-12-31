@@ -7,15 +7,16 @@ import strategies.openai.OpenAIFunctionGenerator;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
+import java.util.function.UnaryOperator;
 
 import client_code.config.ConfigLoader;
 
 public class UserRequestToSQL {
     // Generated function to handle user input for books
-    private final Function<String, String> bookRequestToSQLFunction;
+    private final UnaryOperator<String> bookRequestToSQLFunction;
 
     // Generated function to handle user input for users
-    private final Function<String, String> userRequestToSQLFunction;
+    private final UnaryOperator<String> userRequestToSQLFunction;
 
     public UserRequestToSQL() {
         // Define scenarios for converting user input to SQL queries for books
@@ -76,7 +77,7 @@ public class UserRequestToSQL {
             .withStrategy(functionGenerator)
             .withExecutionError(new IllegalArgumentException( "Only search queries are allowed"), "User should not be able to create, modify or update records")
             .withExecutionError(new IllegalArgumentException("The data requested is not in the allowed columns"), "User should only query for data in title, author, genre and year columns")
-            .build();
+            .buildUnaryOperator();
 
         // Build the userRequestToSQLFunction
         this.userRequestToSQLFunction = FunctionGenerator.builder(String.class, String.class)
@@ -85,7 +86,7 @@ public class UserRequestToSQL {
             .withStrategy(functionGenerator)
             .withExecutionError(new IllegalArgumentException("Only seach queries are allowed"), "User should not be able to create, modify or update records")
             .withExecutionError(new IllegalArgumentException("The data requested is not in the allowed columns"), "User should only query for data in name, email, company and age columns")
-            .build();
+            .buildUnaryOperator();
     }
 
     // Method to process a user request for books
