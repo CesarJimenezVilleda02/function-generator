@@ -63,9 +63,7 @@ import java.util.Enumeration;
  *             .build();
  * 
  *         // Step 3: Use FunctionGenerator to build a function
- *         Function<String, String> bookRequestToSQLFunction = FunctionGenerator.<String, String>builder()
- *             .withInputType(String.class)
- *             .withOutputType(String.class)
+ *         Function<String, String> bookRequestToSQLFunction = FunctionGenerator.builder(String.class, String.class)
  *             .withDescription("Converts user input into SQL queries for the books table. Handle text queries in a case-insensitive manner.")
  *             .withScenarios(bookScenarios)
  *             .withStrategy(functionGenerator)
@@ -653,10 +651,8 @@ public class FunctionGenerator<I, O> {
          *
          * <pre>{@code
          * // Build the function generator with the validation condition
-         * Function<String, Integer> generator = FunctionGenerator.<String, Integer>builder()
+         * Function<String, Integer> generator = FunctionGenerator.builder(String.class,Integer.class)
          *         .withDescription("Parses an integer from a string")
-         *         .withInputType(String.class)
-         *         .withOutputType(Integer.class)
          *         .withStrategy(strategy)
          *         // Define a validation to check for null input
          *         .withPreExecutionCheck(
@@ -705,10 +701,8 @@ public class FunctionGenerator<I, O> {
          *
          * <pre>{@code
          * // Build the function generator with a backend-interpreted error condition
-         * Function<String, String> generator = FunctionGenerator.<String, String>builder()
+         * Function<String, String> generator = FunctionGenerator.builder(String.class, String.class)
          *         .withDescription("Converts a string to uppercase")
-         *         .withInputType(String.class)
-         *         .withOutputType(String.class)
          *         .withStrategy(strategy)
          *         .withExecutionError(
          *             new IllegalArgumentException("Input contains prohibited content"),
@@ -755,9 +749,7 @@ public class FunctionGenerator<I, O> {
          * 
          * <p>Usage:</p>
          * <pre>{@code
-         * Function<Integer, Boolean> isEven = FunctionGenerator.<Integer, Boolean>builder()
-         *     .withInputType(Integer.class)        // Specify input type
-         *     .withOutputType(Boolean.class)       // Specify output type
+         * Function<Integer, Boolean> isEven = FunctionGenerator.builder(Integer.class, Boolean.class)
          *     .withStrategy(functionGenerator)    // Specify strategy
          *     .withTestClass(IsEvenTest.class)    // Specify the test class
          *     .withTestClass(IsEvenTestExceptions.class)    // Specify an additional test class
@@ -930,9 +922,7 @@ public class FunctionGenerator<I, O> {
          * 
          * <p>Usage:</p>
          * <pre>{@code
-         * Function<Integer, Boolean> isEven = FunctionGenerator.<Integer, Boolean>builder()
-         *     .withInputType(Integer.class)        // Specify input type
-         *     .withOutputType(Boolean.class)       // Specify output type
+         * Function<Integer, Boolean> isEven = FunctionGenerator.builder(Integer.class, Boolean.class)
          *     .withStrategy(functionGenerator)    // Specify strategy
          *     .withTestPackage(IsEvenTests.class.getPackage()) // Specify the package containing test classes
          *     .build();

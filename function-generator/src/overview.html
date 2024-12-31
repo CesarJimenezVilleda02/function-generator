@@ -176,11 +176,9 @@
                 .build();
     
             // Step 3: Use FunctionGenerator to build a function
-            Function&lt;String, String&gt; bookRequestToSQLFunction = FunctionGenerator.&lt;String, String&gt;builder()
+            Function&lt;String, String&gt; bookRequestToSQLFunction = FunctionGenerator.builder(String.class, String.class)
                 .withDescription("Converts user input into SQL queries for the books table. Handle text queries in a case-insensitive manner.")
                 .withScenarios(bookScenarios)
-                .withInputType(String.class)
-                .withOutputType(String.class)
                 .withStrategy(functionGenerator)
                 .build();
     
