@@ -11,9 +11,7 @@ import java.util.function.Function;
 public class ProfileValidationTest {
     public static void main(String[] args) {
         OpenAIFunctionGenerator functionGenerator = OpenAIFunctionGenerator.builder().withApiKey(ConfigLoader.getInstance().getApiKey()).build();
-        Function<Object, Boolean> validateProfile = FunctionGenerator.<Object, Boolean>builder()
-            .withInputType(Object.class)          // Specify input type (Profile object)
-            .withOutputType(Boolean.class)        // Specify output type (Boolean for validation result)
+        Function<Object, Boolean> validateProfile = FunctionGenerator.builder(Object.class,Boolean.class)
             // .withDescription("Validates a user profile based on specific rules.") // Add description
             .withStrategy(functionGenerator)
             .withTestClass(ProfileValidationTest.class)

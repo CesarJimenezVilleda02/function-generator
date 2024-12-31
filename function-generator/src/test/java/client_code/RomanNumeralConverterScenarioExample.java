@@ -59,12 +59,10 @@ public class RomanNumeralConverterScenarioExample {
 
         try {
             // Create function with error conditions and scenarios
-            Function<Integer, String> romanNumeralConverter = FunctionGenerator.<Integer, String>builder()
+            Function<Integer, String> romanNumeralConverter = FunctionGenerator.builder(Integer.class, String.class)
                 .withDescription("Convert a positive integer to its Roman numeral representation. "
                             + "Follow standard Roman numeral rules where I=1, V=5, X=10, L=50, C=100, D=500, M=1000. "
                             + "Use subtractive notation where appropriate (e.g., IV for 4, IX for 9).")
-                .withInputType(Integer.class)
-                .withOutputType(String.class)
                 .withScenarios(scenarios)
                 .withPreExecutionCheck(
                     new NegativeNumberException("Input cannot be negative"),

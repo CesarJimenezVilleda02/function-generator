@@ -43,12 +43,10 @@ public class TextAnalyzerWithExecutionErrorExample {
     public static void textAnalyzerWithExecutionErrors() {
         // Create the function with backend-interpreted error conditions
         Function<TextAnalysisRequest, TextAnalysisResult> textAnalyzer = FunctionGenerator
-            .<TextAnalysisRequest, TextAnalysisResult>builder()
+            .builder(TextAnalysisRequest.class,TextAnalysisResult.class)
             .withDescription("Analyze the provided text and return detailed metrics including "
                     + "word count, character count, sentence count, and average word length. "
                     + "Text should be in English and contain proper sentences.")
-            .withInputType(TextAnalysisRequest.class)
-            .withOutputType(TextAnalysisResult.class)
             .withStrategy(functionGenerator)
             .withExecutionError(
                 new NullPointerException("Text analysis request or text cannot be null"),
