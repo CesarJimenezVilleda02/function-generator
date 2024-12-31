@@ -64,10 +64,10 @@ import java.util.Enumeration;
  * 
  *         // Step 3: Use FunctionGenerator to build a function
  *         Function<String, String> bookRequestToSQLFunction = FunctionGenerator.<String, String>builder()
- *             .withDescription("Converts user input into SQL queries for the books table. Handle text queries in a case-insensitive manner.")
- *             .withScenarios(bookScenarios)
  *             .withInputType(String.class)
  *             .withOutputType(String.class)
+ *             .withDescription("Converts user input into SQL queries for the books table. Handle text queries in a case-insensitive manner.")
+ *             .withScenarios(bookScenarios)
  *             .withStrategy(functionGenerator)
  *             .build();
  * 
@@ -123,17 +123,6 @@ public class FunctionGenerator<I, O> {
     }
 
     /**
-     * Creates a new instance of the builder.
-     *
-     * @param <I> the input type
-     * @param <O> the output type
-     * @return a new instance of {@code FunctionGenerator<I, O>}
-     */
-    public static <I, O> Builder<I, O> builder() {
-        return new Builder<I, O>();
-    }
-
-    /**
      * Constructor for FunctionGenerator using the builder.
      */
     private FunctionGenerator(Builder<I, O> builder) {
@@ -147,7 +136,7 @@ public class FunctionGenerator<I, O> {
             throw new NullPointerException("A description must be provided.");
         }
 
-        System.out.println("Description: " + builder.description);
+        // System.out.println("Description: " + builder.description);
 
         this.prompt = builder.scenarios != null
                 ? generateScenariosPrompt(builder.description.toString(), builder.scenarios)
@@ -542,6 +531,19 @@ public class FunctionGenerator<I, O> {
     }
 
     /**
+     * Creates and returns a new builder for constructing a function generator.
+     *
+     * @param <J> the type of the input to the function
+     * @param <K> the type of the output from the function
+     * @param inputType the {@link Class} representing the input type of the function
+     * @param outputType the {@link Class} representing the output type of the function
+     * @return a new instance of {@code Builder} parameterized with {@code <J, K>}
+     */
+    public static <J, K> Builder<J, K> builder(Class<J> inputType, Class<K> outputType) {
+        return new Builder<>(inputType, outputType);
+    }
+
+    /**
      * A builder for creating functions using descriptions, scenarios,
      * test classes, or custom strategies.
      * <p>
@@ -595,28 +597,9 @@ public class FunctionGenerator<I, O> {
             };
         }
 
-        /**
-         * Sets the input type for the function. The input type can be specified by calling this method once. Calling this method multiple times will override the previous input type.
-         * Must coincide with the input type of the function.
-         *
-         * @param inputType the class of the input type {@code I}
-         * @return this builder instance
-         */
-        public Builder<I, O> withInputType(Class<I> inputType) {
+        private Builder(Class<I> inputType, Class<O> outputType) {
             this.inputType = inputType;
-            return this;
-        }
-
-        /**
-         * Sets the output type for the function. The output type can be specified by calling this method once, calling this method multiple times will override the previous output type.
-         *Must coincide with the output type of the function.
-         * 
-         * @param outputType the class of the output type {@code O}
-         * @return this builder instance
-         */
-        public Builder<I, O> withOutputType(Class<O> outputType) {
             this.outputType = outputType;
-            return this;
         }
 
         /**
