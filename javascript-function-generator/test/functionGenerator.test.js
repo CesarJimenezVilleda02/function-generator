@@ -1,5 +1,6 @@
 const { FunctionGenerator } = require('../src');
 const FunctionGenerationStrategy = require('../src/strategies/FunctionGenerationStrategy');
+const Scenario = require('../src/scenarios/Scenario');
 
 class MockStrategy extends FunctionGenerationStrategy {
   constructor(response) {
@@ -45,4 +46,57 @@ test('Natural language error triggers exception', async () => {
     .withNaturalLanguageError(new RangeError('Too big'), 'Input is too large')
     .build();
   await expect(fn(5)).rejects.toThrow('Too big');
+});
+
+test('Prompt includes JSON for object input', async () => {
+  const strategy = new MockStrategy(JSON.stringify('ok'));
+  const fn = FunctionGenerator
+    .builder(Object, String)
+    .withDescription('Process object input.')
+    .withStrategy(strategy)
+    .build();
+  await fn({ foo: 'bar' });
+  expect(strategy.lastPrompt).toContain('---INPUT---\n{"foo":"bar"}\n---INPUT END---');
+});
+
+test('Prompt includes JSON for array input', async () => {
+  const strategy = new MockStrategy(JSON.stringify('ok'));
+  const fn = FunctionGenerator
+    .builder(Array, String)
+    .withDescription('Process array input.')
+    .withStrategy(strategy)
+    .build();
+  await fn([1, 2, 3]);
+  expect(strategy.lastPrompt).toContain('---INPUT---\n[1,2,3]\n---INPUT END---');
+});
+
+test('Prompt includes JSON for array of objects input', async () => {
+  const strategy = new MockStrategy(JSON.stringify('ok'));
+  const fn = FunctionGenerator
+    .builder(Array, String)
+    .withDescription('Process array of objects.')
+    .withStrategy(strategy)
+    .build();
+  await fn([{ a: 1 }, { b: 2 }]);
+  expect(strategy.lastPrompt).toContain('---INPUT---\n[{"a":1},{"b":2}]\n---INPUT END---');
+});
+
+test('Scenario prompt includes example details', async () => {
+  const strategy = new MockStrategy(JSON.stringify('ok'));
+  const scenarios = [
+    new Scenario({ a: 1 }, { b: 2 }, 'maps a to b'),
+    new Scenario({ c: 3 }, { d: 4 }, 'maps c to d')
+  ];
+  const fn = FunctionGenerator
+    .builder(Object, Object)
+    .withDescription('Map keys to new keys.')
+    .withScenarios(scenarios)
+    .withStrategy(strategy)
+    .build();
+  await fn({ a: 1 });
+  expect(strategy.lastPrompt).toContain('Example Scenarios:');
+  expect(strategy.lastPrompt).toContain('Scenario 1:');
+  expect(strategy.lastPrompt).toContain('Input: {"a":1}');
+  expect(strategy.lastPrompt).toContain('Expected Output: {"b":2}');
+  expect(strategy.lastPrompt).toContain('Description: maps a to b');
 });
