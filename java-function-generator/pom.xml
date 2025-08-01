@@ -1,8 +1,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>function-generator</groupId>
-  <artifactId>function-generator</artifactId>
+  <groupId>java-function-generator</groupId>
+  <artifactId>java-function-generator</artifactId>
   <packaging>jar</packaging>
   <version>1.0</version>
   <name>Function Generator</name>
@@ -76,7 +76,7 @@
         <version>3.3.1</version> <!-- Update to the latest version if possible -->
         <configuration>
           <sourcepath>src/main/java</sourcepath> <!-- Ensure it points to the correct source root -->
-          <destDir>../../../../docs</destDir>
+          <destDir>../docs/java-function-generator</destDir>
           <source>1.8</source>
           <encoding>UTF-8</encoding>
           <charset>UTF-8</charset>
