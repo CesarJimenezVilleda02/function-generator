@@ -55,7 +55,7 @@ The frontend will be available at:
 
 ### 2. Running the Backend
 
-Navigate to the `function-generator` directory:
+Navigate to the `java-function-generator` directory:
 ```bash
 cd ../../../../../
 ```

@@ -37,9 +37,9 @@ Make sure the config.ini file is in the root directory.
 
 ### Compile the Project
 
-Make sure you're in the function-generator directory:
+Make sure you're in the `java-function-generator` directory:
 ```sh
-cd function-generator
+cd java-function-generator
 ```
 
 To compile the project, run:
