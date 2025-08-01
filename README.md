@@ -52,3 +52,20 @@ To generate the Javadoc, run:
 ```sh
 mvn javadoc:javadoc
 ```
+
+## JavaScript Function Generator
+
+A Node.js translation of the Function Generator API is available in the `javascript-function-generator` folder. It exposes the same concepts as the Java library and can be installed as an npm package.
+
+### Install dependencies
+
+```sh
+cd javascript-function-generator
+npm install
+```
+
+### Run unit tests
+
+```sh
+npm test
+```
