@@ -36,3 +36,5 @@ ehthumbs.db
 Thumbs.db
 maven-javadoc-plugin-stale-data.txt
 server.db
+node_modules/
+**/node_modules/
